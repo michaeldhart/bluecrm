@@ -8,3 +8,6 @@
 !/.yarn/cache/*
 
 client/.yarn/**/*
+
+server/.yarn/**/*
+server/node_modules/*
