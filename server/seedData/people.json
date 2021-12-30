@@ -1,10 +1,1 @@
-[
-  {
-    "guid": "555666777888999000",
-    "fullName": "Michael Hart",
-    "preferredName": "Michael",
-    "address": [],
-    "phone": [],
-    "email": ["mdhart1@gmail.com"]
-  }
-]
+[{"guid":"595d2f8c-9453-ea3c-cd75-47efa4a11aee","fullName":"Michael Hartzzz","preferredName":"","address":[{"address1":"516 N State St","address2":"","city":"Belvidere","state":"IL","zip":"61008"}],"phone":[{"number":2129207870,"smsFriendly":true}],"email":["mdhart1@gmail.com"]},{"guid":"03bd344f-a31f-4447-e4d2-f4eaefa1d824","fullName":"Eva Lynne Hartzzz","preferredName":"","address":[{"address1":"516 N State St","address2":"","city":"Belvidere","state":"IL","zip":"61008"}],"phone":[{"number":0,"smsFriendly":true}],"email":["mdhart1@gmail.com"]}]

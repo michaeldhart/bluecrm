@@ -1,4 +1,4 @@
-import { Person } from '../models/Person';
+import { Person } from '../../../../shared/src/js/models/Person';
 
 export type GlobalUIState = {
   drawerState: boolean;

@@ -8,8 +8,12 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { Person } from '../models/Person';
-import { contatctsStateSlice } from '../redux/contactsStateSlice';
+import { useEffect } from 'react';
+import { Person } from '../../../../shared/src/js/models/Person';
+import {
+  contactsStateSlice,
+  contactsStateAsyncActions,
+} from '../redux/contactsStateSlice';
 import { contatctsUIStateSlice } from '../redux/contactsUIStateSlice';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 
@@ -17,12 +21,16 @@ export const ContactsTable = () => {
   const contacts = useAppSelector((state) => state.contactsState.contacts);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(contactsStateAsyncActions.listContacts());
+  }, []);
+
   const handleDeleteContact = (contact: Person) => {
-    dispatch(contatctsStateSlice.actions.deleteContact(contact));
+    dispatch(contactsStateAsyncActions.deleteContact(contact.guid));
   };
 
   const handleSelectContact = (contact: Person) => {
-    dispatch(contatctsStateSlice.actions.setSelectedContact(contact));
+    dispatch(contactsStateSlice.actions.setSelectedContact(contact));
     dispatch(contatctsUIStateSlice.actions.openAddEditContactDialog());
   };
 
@@ -37,7 +45,7 @@ export const ContactsTable = () => {
             <TableCell>State</TableCell>
             <TableCell>Zip</TableCell>
             <TableCell>Phone</TableCell>
-            <TableCell>Email</TableCell>
+            <TableCell colSpan={2}>Email</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -1,18 +1,17 @@
 import express, { Request, Response } from 'express';
+import { PeopleDao } from '../data/peopleDao';
 
 export const initPeopleRoutes = (app: express.Application) => {
-  app.route('/people').post(create).get(list).put(update).delete(remove);
-  app.get('people/:guid', get);
+  app.route('/people').post(create).get(list);
+  app.route('/people/:guid').get(get).put(update).delete(remove);
 };
 
 const create = (req: Request, res: Response) => {
-  console.log(req.body);
-  res.end();
+  res.send(PeopleDao.createPerson(req.body.data));
 };
 
 const list = (req: Request, res: Response) => {
-  console.log(req.body);
-  res.end();
+  res.send(PeopleDao.listPeople());
 };
 
 const get = (req: Request, res: Response) => {
@@ -21,11 +20,9 @@ const get = (req: Request, res: Response) => {
 };
 
 const update = (req: Request, res: Response) => {
-  console.log(req.body);
-  res.end();
+  res.send(PeopleDao.updatePerson(req.body.data));
 };
 
 const remove = (req: Request, res: Response) => {
-  console.log(req.body);
-  res.end();
+  res.send(PeopleDao.deletePerson(req.params.guid));
 };

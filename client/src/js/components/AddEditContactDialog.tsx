@@ -12,8 +12,10 @@ import {
   Autocomplete,
 } from '@mui/material';
 import { useFormik } from 'formik';
-import { Guid } from 'guid-typescript';
-import { contatctsStateSlice } from '../redux/contactsStateSlice';
+import {
+  contactsStateAsyncActions,
+  contactsStateSlice,
+} from '../redux/contactsStateSlice';
 import { contatctsUIStateSlice } from '../redux/contactsUIStateSlice';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 
@@ -88,7 +90,7 @@ export const AddEditContactDialog = () => {
     (state) => state.contactsState.selectedContact
   );
   const handleCloseDialog = () => {
-    dispatch(contatctsStateSlice.actions.unsetSelectedContact());
+    dispatch(contactsStateSlice.actions.unsetSelectedContact());
     dispatch(contatctsUIStateSlice.actions.closeAddEditContactDialog());
   };
   const initialValues = selectedContactState
@@ -131,7 +133,7 @@ export const AddEditContactDialog = () => {
         email,
       } = values;
       const newContact = {
-        guid: selectedContactState ? selectedContactState.guid : Guid.raw(),
+        guid: selectedContactState ? selectedContactState.guid : '',
         fullName: fullName,
         preferredName: preferredName,
         address: [
@@ -152,8 +154,8 @@ export const AddEditContactDialog = () => {
         email: [email],
       };
       selectedContactState
-        ? dispatch(contatctsStateSlice.actions.updateContact(newContact))
-        : dispatch(contatctsStateSlice.actions.addContact(newContact));
+        ? dispatch(contactsStateAsyncActions.updateContact(newContact))
+        : dispatch(contactsStateAsyncActions.addContact(newContact));
       actions.resetForm();
       handleCloseDialog();
     },
@@ -224,6 +226,7 @@ export const AddEditContactDialog = () => {
                   renderInput={(params) => (
                     <TextField
                       {...params}
+                      name="state"
                       label="State"
                       value={formik.values.state}
                       onChange={formik.handleChange}
@@ -265,7 +268,7 @@ export const AddEditContactDialog = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog}>Cancel</Button>
-          <Button type="submit">Add</Button>
+          <Button type="submit">{selectedContactState ? 'Save' : 'Add'}</Button>
         </DialogActions>
       </form>
     </Dialog>
