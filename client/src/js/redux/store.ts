@@ -3,12 +3,14 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { contactsStateSlice } from './contactsStateSlice';
 import { contatctsUIStateSlice } from './contactsUIStateSlice';
 import { globalUIStateSlice } from './globalUIStateSlice';
+import { settingsStateSlice } from './settingsStateSlice';
 
 export const store = configureStore({
   reducer: {
+    settingsState: settingsStateSlice.reducer,
+    contactsState: contactsStateSlice.reducer,
     globalUIState: globalUIStateSlice.reducer,
     contactsUIState: contatctsUIStateSlice.reducer,
-    contactsState: contactsStateSlice.reducer,
   },
 });
 

@@ -2,15 +2,17 @@ import express from 'express';
 import cors from 'cors';
 import { initInMemoryDb } from './data/inMemoryDb';
 import { initPeopleRoutes } from './routes/peopleRoutes';
+import { initSettingsRoutes } from './routes/settingsRoutes';
+
+const app = express();
+const port = 7000;
 
 const initRoutes = () => {
+  initSettingsRoutes(app);
   initPeopleRoutes(app);
 };
 
 initInMemoryDb();
-
-const app = express();
-const port = 7000;
 
 app.use(
   cors({
